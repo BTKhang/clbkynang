@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Danh sách lãnh đạo CLB Kỹ năng</title>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="#" onclick="showSection('home')">Trang chủ</a></li>
+                <li><a href="#" onclick="showSection('recruitment')">Tuyển thành viên</a></li>
+                <li><a href="#" onclick="showSection('search')">Tìm kiếm</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <section id="home">
+            <h1>Câu lạc bộ Kỹ năng</h1>
+            <p>Đến với CLB KỸ NĂNG QNU, bạn không chỉ là một mảnh ghép kí ức tuyệt với với các Skillers khác, bạn còn có vô vàn cơ hội học hỏi và trải nghiệm  !<br>
+                🎀 MẢNG ĐOÀN HỘI giúp các bạn phát triển và trải nghiệm các kĩ năng thực tế, hữu ích : <br>
+                ✨ Semaphore ✨ <br>
+                ✨ Dân Vũ ✨ <br>
+                ✨ Mật thư, Morse ✨ <br>
+                ✨ Sơ cấp cứu thuốc nam ✨ <br>
+                ✨ Thắt gút dây ✨ <br>
+                ✨ Lửa trại, dựng trại ✨ <br>
+                ✨ Tổ chức team building, trò chơi lớn ✨ <br>
+                🌸 MẢNG XÃ HỘI hỗ trợ, bồi dưỡng các bạn những kĩ năng cần thiết, quan trọng : <br>
+                🌟 Hùng Biện 🌟 <br>
+                🌟 Tranh Biện - Thuyết Trình 🌟 <br>
+                🌟 MC 🌟<br>
+                🌟 Tổ chức chương trình 🌟<br>
+                👫🏻 𝘾𝙤̀𝙣 𝙣𝙚̂́𝙪 𝙘𝙖́𝙘 𝙗𝙖̣𝙣 𝙘𝙝𝙪̛𝙖 𝙘𝙤́ 𝙣𝙜𝙪̛𝙤̛̀𝙞 𝙮𝙚̂𝙪 🫣? 🌟<br>
+                🤭SKILLS CLUB không hứa sẽ phát người yêu cho bạn nhưng sẽ giúp các bạn TĂNG SKILLS - TĂNG ĐỘ SIÊU để có thể tìm kiếm và chinh phục nửa kia của mình 😍 </p>
+            <div class="home-images">
+                <img src="club_image1.jpg" alt="Câu lạc bộ" class="home-image">
+                <img src="club_image2.jpg" alt="Hoạt động câu lạc bộ" class="home-image">
+            </div>
+        </section>
+        <section id="recruitment" style="display: none;">
+            <h1>Tuyển thành viên</h1>
+            <p>Thông tin về việc tuyển thành viên mới sẽ được cập nhật tại đây...</p>
+            <div class="contact-buttons">
+                <button onclick="showContact('facebook')">Facebook</button>
+                <button onclick="showContact('zalo')">Zalo</button>
+                <button onclick="showContact('phone')">Phone</button>
+            </div>
+        </section>
+        <section id="search" style="display: none;">
+            <h1>Danh sách lãnh đạo CLB Kỹ năng</h1>
+            <div class="search-container">
+                <input type="text" id="searchBar" placeholder="Tìm kiếm tên...">
+                <button id="searchButton" onclick="searchLeaders()">🔍</button>
+            </div>
+            <div id="results"></div>
+        </section>
+    </main>
+    <div id="contactModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <div id="contactInfo"></div>
+        </div>
+    </div>
+    <script src="search.js"></script>
+    <script>
+        function showSection(sectionId) {
+            document.querySelectorAll('main section').forEach(section => {
+                section.style.display = 'none';
+            });
+            document.getElementById(sectionId).style.display = 'block';
+        }
+
+        function showContact(contactType) {
+            const contactInfo = {
+                facebook: 'Facebook: facebook.com/clbkyanang',
+                zalo: 'Zalo: 0123456789',
+                phone: 'Phone: 0987654321'
+            };
+
+            document.getElementById('contactInfo').innerText = contactInfo[contactType];
+            document.getElementById('contactModal').style.display = 'flex';
+        }
+
+        function closeModal() {
+            document.getElementById('contactModal').style.display = 'none';
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            showSection('home');
+        });
+    </script>
+</body>
+</html>
