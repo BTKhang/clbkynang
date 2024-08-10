@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Danh sách lãnh đạo CLB Kỹ năng</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="#" onclick="showSection('home')">Trang chủ</a></li>
+                <li><a href="#" onclick="showSection('recruitment')">Tuyển thành viên</a></li>
+                <li><a href="#" onclick="showSection('search')">Tìm kiếm</a></li>
+            </ul>
+        </nav>
+        <img src="logo.png" alt="Logo" class="logo">
+    </header>
+    <main>
+        <section id="home">
+            <h1 id="clubTitle"></h1>
+            <div id="clubContent"></div>
+            <div class="home-images">
+                <img src="club_image1.jpg" alt="Câu lạc bộ" class="home-image">
+                <img src="club_image2.jpg" alt="Hoạt động câu lạc bộ" class="home-image">
+            </div>
+        </section>
+        <section id="recruitment" style="display: none;">
+            <h1 id="recruitmentTitle"></h1>
+            <div id="recruitmentContent"></div>
+            <div class="contact-buttons">
+                <a href="https://www.facebook.com/buitan.khang0206" target="_blank" class="contact-link">
+                    Facebook
+                </a>
+                <a href="https://zalo.me/0971642189" target="_blank" class="contact-link">
+                    Zalo
+                </a>
+                <a href="tel:+84971642189" class="contact-link">
+                    Phone
+                </a>
+            </div>
+        </section>
+        <section id="search" style="display: none;">
+            <h1>Danh sách lãnh đạo CLB Kỹ năng</h1>
+            <div class="search-container">
+                <input type="text" id="searchBar" placeholder="Tìm kiếm tên hoặc chức vụ..." onkeyup="searchLeaders()">
+                <button id="searchButton" onclick="searchLeaders()">🔍</button>
+            </div>
+            <div id="suggestions" class="suggestion-box"></div>
+            <div id="results"></div>
+        </section>
+    </main>
+    <script src="search.js"></script>
+    <script>
+        function showSection(sectionId) {
+            document.querySelectorAll('main section').forEach(section => {
+                section.style.display = 'none';
+            });
+            document.getElementById(sectionId).style.display = 'block';
+        }
+
+        function loadContent() {
+            fetch('content.json')
+                .then(response => response.json())
+                .then(data => {
+                    // Nạp nội dung CLB Kỹ năng
+                    document.getElementById('clubTitle').textContent = data.clubContent.title;
+                    const clubContentDiv = document.getElementById('clubContent');
+                    data.clubContent.paragraphs.forEach(paragraph => {
+                        const p = document.createElement('p');
+                        p.textContent = paragraph;
+                        clubContentDiv.appendChild(p);
+                    });
+
+                    // Nạp nội dung Tuyển thành viên
+                    document.getElementById('recruitmentTitle').textContent = data.recruitmentContent.title;
+                    const recruitmentContentDiv = document.getElementById('recruitmentContent');
+                    data.recruitmentContent.paragraphs.forEach(paragraph => {
+                        const p = document.createElement('p');
+                        p.textContent = paragraph;
+                        recruitmentContentDiv.appendChild(p);
+                    });
+                })
+                .catch(error => console.error('Error loading content:', error));
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            showSection('home');
+            loadContent();
+        });
+    </script>
+</body>
+</html>

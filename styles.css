@@ -1,0 +1,320 @@
+/* Đặt lại mặc định */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: url('background-image.jpg') no-repeat center center fixed;
+    background-size: cover;
+    color: #333;
+    padding-top: 80px;
+}
+
+/* Header */
+header {
+    background-color: rgba(96, 96, 96, 0.8);
+    padding: 15px 20px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1000;
+}
+
+header .logo {
+    height: 50px;
+}
+
+nav ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+}
+
+nav ul li {
+    margin: 0 15px;
+    position: relative;
+}
+
+nav ul li a {
+    color: white;
+    text-decoration: none;
+    font-size: 18px;
+    padding: 10px 20px;
+    display: block;
+    border-radius: 4px;
+    transition: background-color 0.3s, transform 0.3s;
+}
+
+nav ul li a:hover {
+    background-color: #404040;
+    transform: scale(1.1);
+}
+
+/* Main */
+main {
+    padding: 40px 20px;
+    background-color: rgba(255, 255, 255, 0.8);
+    border-radius: 8px;
+}
+
+/* Home Section */
+#home {
+    text-align: center;
+}
+
+#home h1 {
+    color: #606060;
+    margin-bottom: 20px;
+    font-size: 32px;
+}
+
+#home p {
+    margin-bottom: 40px;
+    font-size: 18px;
+    line-height: 1.6;
+}
+
+.home-images {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
+.home-image {
+    width: 45%;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s;
+}
+
+.home-image:hover {
+    transform: scale(1.05);
+}
+
+/* Recruitment Section */
+#recruitment h1 {
+    text-align: center;
+    color: #606060;
+    margin-bottom: 20px;
+    font-size: 32px;
+}
+
+#recruitment p {
+    text-align: center;
+    margin-bottom: 40px;
+    font-size: 18px;
+    line-height: 1.6;
+}
+
+.contact-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
+.contact-link {
+    display: inline-block;
+    padding: 15px 30px;
+    font-size: 18px;
+    text-align: center;
+    text-decoration: none;
+    border-radius: 50px;
+    background-color: #3498db;
+    color: white;
+    transition: background-color 0.3s, transform 0.3s, box-shadow 0.3s;
+}
+
+.contact-link:hover {
+    background-color: #2980b9;
+    transform: translateY(-3px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Search Section */
+#search h1 {
+    text-align: center;
+    color: #606060;
+    margin-bottom: 20px;
+    font-size: 32px;
+}
+
+.search-container {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 40px;
+    position: relative;
+}
+
+#searchBar {
+    width: 50%;
+    padding: 15px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 18px;
+}
+
+#searchButton {
+    padding: 15px;
+    cursor: pointer;
+    border: none;
+    background-color: #606060;
+    color: white;
+    border-radius: 4px;
+    margin-left: 10px;
+    font-size: 18px;
+    transition: background-color 0.3s, transform 0.3s;
+}
+
+#searchButton:hover {
+    background-color: #404040;
+    transform: scale(1.05);
+}
+
+.suggestion-box {
+    border: 1px solid #ccc;
+    background-color: white;
+    max-height: 200px;
+    overflow-y: auto;
+    position: absolute;
+    width: calc(50% - 20px);
+    z-index: 1000;
+    top: 100%;
+    left: 0;
+}
+
+.suggestion-item {
+    padding: 10px;
+    cursor: pointer;
+    border-bottom: 1px solid #ddd;
+}
+
+.suggestion-item:hover {
+    background-color: #f1f1f1;
+}
+
+.leader {
+    display: flex;
+    align-items: flex-start;
+    border: 1px solid #ccc;
+    background-color: white;
+    border-radius: 8px;
+    padding: 16px;
+    margin: 16px 0;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s;
+}
+
+.leader:hover {
+    transform: scale(1.02);
+}
+
+.leader img {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    margin-right: 20px;
+    object-fit: cover;
+}
+
+.leader h2 {
+    margin: 0;
+    color: #606060;
+}
+
+.leader p {
+    margin: 4px 0;
+    color: #555;
+}
+
+#results {
+    width: 80%;
+    margin: 0 auto;
+}
+
+/* Leader Detail */
+.leader-detail-container {
+    display: flex;
+    justify-content: center;
+    padding: 20px;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin: 20px auto;
+    width: 80%;
+    max-width: 800px;
+}
+
+.leader-detail {
+    display: flex;
+    align-items: center;
+    text-align: center;
+    flex-direction: column;
+}
+
+.leader-img {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    margin-bottom: 20px;
+}
+
+.leader-info h2 {
+    margin: 10px 0;
+    color: #333;
+}
+
+.leader-info p {
+    margin: 5px 0;
+    color: #555;
+}
+
+/* Responsive Design */
+@media screen and (max-width: 768px) {
+    nav ul {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    .home-images {
+        flex-direction: column;
+    }
+    #searchBar {
+        width: 100%;
+    }
+    #leaderDetail .leader {
+        flex-direction: column;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    header .logo {
+        height: 40px;
+    }
+    nav ul li a {
+        font-size: 16px;
+        padding: 8px 16px;
+    }
+    .contact-link {
+        padding: 10px 20px;
+        font-size: 16px;
+    }
+    #leaderDetail .leader img {
+        width: 150px;
+        height: 150px;
+    }
+}
+#clubContent p {
+    line-height: 1.2;
+    margin-bottom: 8px; 
+}
+#recruitmentContent p {
+    line-height: 1.2;
+    margin-bottom: 8px;
+}

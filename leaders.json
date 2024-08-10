@@ -1,0 +1,56 @@
+[
+    {
+        "id": 1,
+        "name": "Lê Anh Quân",
+        "title": "Trưởng mảng",
+        "email": "nguyenvana@example.com",
+        "phone": "0123456789",
+        "img": "leader1.jpg",
+        "bio": "Giới thiệu"
+    },
+    {
+        "id": 2,
+        "name": "Trần Thị B",
+        "title": "Phó mảng",
+        "email": "tranthib@example.com",
+        "phone": "0987654321",
+        "img": "leader2.jpg",
+        "bio": "Giới thiệu"
+    },
+    {
+        "id": 3,
+        "name": "Trần Thị C",
+        "title": "Phó mảng",
+        "email": "tranthib@example.com",
+        "phone": "0987654321",
+        "img": "leader2.jpg",
+        "bio": "Giới thiệu"
+    },
+    {
+        "id": 4,
+        "name": "Nguyễn Văn A",
+        "title": "Trưởng mảng",
+        "email": "nguyenvana@example.com",
+        "phone": "0123456789",
+        "img": "leader1.jpg",
+        "bio": "Giới thiệu"
+    },
+    {
+        "id": 5,
+        "name": "Trần Thị B",
+        "title": "Phó mảng",
+        "email": "tranthib@example.com",
+        "phone": "0987654321",
+        "img": "leader2.jpg",
+        "bio": "Giới thiệu"
+    },
+    {
+        "id": 6,
+        "name": "Trần Thị C",
+        "title": "Phó mảng",
+        "email": "tranthib@example.com",
+        "phone": "0987654321",
+        "img": "leader2.jpg",
+        "bio": "Giới thiệu"
+    }
+]
