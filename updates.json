@@ -1,0 +1,20 @@
+[
+    {
+        "name": "Hoạt động 1",
+        "date": "2024-08-10",
+        "url": "https://example.com/activity1",
+        "image": "activity1.jpg"
+    },
+    {
+        "name": "Hoạt động 2",
+        "date": "2024-08-15",
+        "url": "https://example.com/activity2",
+        "image": "activity1.jpg"
+    },
+    {
+        "name": "Trại Vươn Xa",
+        "date": "2024-08-20",
+        "url": "https://example.com/activity3",
+        "image": "activity1.jpg"
+    }
+]

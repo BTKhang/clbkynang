@@ -418,3 +418,64 @@ main {
 .audio-btn:hover {
     transform: scale(1.1);
 }
+
+
+/* Thêm vào styles.css */
+.update-list {
+    display: flex;
+    flex-direction: column;
+    gap: 30px; /* Tăng khoảng cách giữa các mục */
+    margin: 20px auto;
+    max-width: 600px;
+}
+
+.update-item {
+    background-color: white;
+    padding: 20px;
+    border-radius: 12px; /* Tăng độ bo góc */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15); /* Tăng hiệu ứng bóng */
+    transition: transform 0.3s;
+    text-align: center;
+    position: relative;
+    border: 1px solid #e0e0e0; /* Thêm viền nhẹ cho mỗi mục */
+}
+
+.update-item img.update-image {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+    margin-bottom: 15px;
+}
+
+.update-item h2 {
+    margin-bottom: 10px;
+    color: #606060;
+    font-size: 24px;
+}
+
+.update-item p {
+    margin-bottom: 20px;
+    font-size: 16px;
+    color: #555;
+}
+
+.update-item .btn {
+    display: inline-block;
+    padding: 10px 20px;
+    font-size: 16px;
+    color: white;
+    background-color: #3498db;
+    border-radius: 4px;
+    text-decoration: none;
+    transition: background-color 0.3s, transform 0.3s;
+}
+
+.update-item .btn:hover {
+    background-color: #2980b9;
+    transform: scale(1.05);
+}
+
+.update-item:hover {
+    transform: scale(1.02);
+}
+

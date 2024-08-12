@@ -3,17 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Danh sách lãnh đạo CLB Kỹ năng</title>
+    <title>Trang chủ</title>
     <link rel="stylesheet" href="styles.css">
-    <link rel="icon" href="favicon.ico" type="image/x-icon">
 </head>
 <body>
     <header>
         <nav>
             <ul>
-                <li><a href="#" onclick="showSection('home')">Trang chủ</a></li>
-                <li><a href="#" onclick="showSection('recruitment')">Tuyển thành viên</a></li>
-                <li><a href="#" onclick="showSection('search')">Tìm kiếm</a></li>
+                <li><a href="index.html">Trang chủ</a></li>
+                <li><a href="recruitment.html">Tuyển thành viên</a></li>
+                <li><a href="search.html">Tìm kiếm</a></li>
+                <li><a href="update.html">Cập nhật ảnh</a></li>
             </ul>
         </nav>
         <img src="logo.png" alt="Logo" class="logo">
@@ -27,45 +27,13 @@
                 <img src="club_image2.jpg" alt="Hoạt động câu lạc bộ" class="home-image">
             </div>
         </section>
-        <section id="recruitment" style="display: none;">
-            <h1 id="recruitmentTitle"></h1>
-            <div id="recruitmentContent"></div>
-            <div class="contact-buttons">
-                <a href="https://www.facebook.com/buitan.khang0206" target="_blank" class="contact-link">
-                    Facebook
-                </a>
-                <a href="https://zalo.me/0971642189" target="_blank" class="contact-link">
-                    Zalo
-                </a>
-                <a href="tel:+84971642189" class="contact-link">
-                    Phone
-                </a>
-            </div>
-        </section>
-        <section id="search" style="display: none;">
-            <h1>Danh sách lãnh đạo CLB Kỹ năng</h1>
-            <div class="search-container">
-                <input type="text" id="searchBar" placeholder="Tìm kiếm tên hoặc chức vụ..." onkeyup="searchLeaders()">
-                <button id="searchButton" onclick="searchLeaders()">🔍</button>
-            </div>
-            <div id="suggestions" class="suggestion-box"></div>
-            <div id="results"></div>
-        </section>
     </main>
     <script src="search.js"></script>
     <script>
-        function showSection(sectionId) {
-            document.querySelectorAll('main section').forEach(section => {
-                section.style.display = 'none';
-            });
-            document.getElementById(sectionId).style.display = 'block';
-        }
-
         function loadContent() {
             fetch('content.json')
                 .then(response => response.json())
                 .then(data => {
-                    // Nạp nội dung CLB Kỹ năng
                     document.getElementById('clubTitle').textContent = data.clubContent.title;
                     const clubContentDiv = document.getElementById('clubContent');
                     data.clubContent.paragraphs.forEach(paragraph => {
@@ -73,130 +41,119 @@
                         p.textContent = paragraph;
                         clubContentDiv.appendChild(p);
                     });
-
-                    // Nạp nội dung Tuyển thành viên
-                    document.getElementById('recruitmentTitle').textContent = data.recruitmentContent.title;
-                    const recruitmentContentDiv = document.getElementById('recruitmentContent');
-                    data.recruitmentContent.paragraphs.forEach(paragraph => {
-                        const p = document.createElement('p');
-                        p.textContent = paragraph;
-                        recruitmentContentDiv.appendChild(p);
-                    });
                 })
                 .catch(error => console.error('Error loading content:', error));
         }
-        
 
         document.addEventListener('DOMContentLoaded', () => {
-            showSection('home');
             loadContent();
         });
     </script>
-    <button id="audioControl" class="audio-btn">
-        🔊
-    </button>
-    <audio id="myAudio" loop autoplay>
-        <source src="anhemtave.mp3" type="audio/mpeg">
-        Your browser does not support the audio element.
-    </audio>
+        <button id="audioControl" class="audio-btn">
+            🔊
+        </button>
+        <audio id="myAudio" loop autoplay>
+            <source src="anhemtave.mp3" type="audio/mpeg">
+            Your browser does not support the audio element.
+        </audio>
+        
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+        const audio = document.getElementById('myAudio');
+        const audioBtn = document.getElementById('audioControl');
+        let isPlaying = true;
     
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-    const audio = document.getElementById('myAudio');
-    const audioBtn = document.getElementById('audioControl');
-    let isPlaying = true;
-
-    const playPromise = audio.play();
-
-    if (playPromise !== undefined) {
-        playPromise.then(_ => {
-            isPlaying = true;
-            audioBtn.textContent = '🔊';
-        }).catch(error => {
-            isPlaying = false;
-            audioBtn.textContent = '🔇';
+        const playPromise = audio.play();
+    
+        if (playPromise !== undefined) {
+            playPromise.then(_ => {
+                isPlaying = true;
+                audioBtn.textContent = '🔊';
+            }).catch(error => {
+                isPlaying = false;
+                audioBtn.textContent = '🔇';
+            });
+        }
+    
+        audioBtn.addEventListener('click', function() {
+            if (isPlaying) {
+                audio.pause();
+                audioBtn.textContent = '🔇';
+            } else {
+                audio.play();
+                audioBtn.textContent = '🔊';
+            }
+            isPlaying = !isPlaying;
         });
-    }
-
-    audioBtn.addEventListener('click', function() {
-        if (isPlaying) {
-            audio.pause();
-            audioBtn.textContent = '🔇';
-        } else {
-            audio.play();
-            audioBtn.textContent = '🔊';
+    
+        let offsetX, offsetY;
+    
+        audioBtn.addEventListener('mousedown', function(e) {
+            offsetX = e.clientX - audioBtn.getBoundingClientRect().left;
+            offsetY = e.clientY - audioBtn.getBoundingClientRect().top;
+            document.addEventListener('mousemove', moveAt);
+        });
+    
+        audioBtn.addEventListener('touchstart', function(e) {
+            const touch = e.touches[0];
+            offsetX = touch.clientX - audioBtn.getBoundingClientRect().left;
+            offsetY = touch.clientY - audioBtn.getBoundingClientRect().top;
+            document.addEventListener('touchmove', moveAt);
+        });
+    
+        function moveAt(e) {
+            e.preventDefault();
+            let x = (e.touches ? e.touches[0].clientX : e.clientX) - offsetX;
+            let y = (e.touches ? e.touches[0].clientY : e.clientY) - offsetY;
+    
+            const minX = 0;
+            const maxX = window.innerWidth - audioBtn.offsetWidth;
+            const minY = 0;
+            const maxY = window.innerHeight - audioBtn.offsetHeight;
+    
+            x = Math.max(minX, Math.min(maxX, x));
+            y = Math.max(minY, Math.min(maxY, y));
+    
+            audioBtn.style.left = `${x}px`;
+            audioBtn.style.top = `${y}px`;
         }
-        isPlaying = !isPlaying;
-    });
-
-    let offsetX, offsetY;
-
-    audioBtn.addEventListener('mousedown', function(e) {
-        offsetX = e.clientX - audioBtn.getBoundingClientRect().left;
-        offsetY = e.clientY - audioBtn.getBoundingClientRect().top;
-        document.addEventListener('mousemove', moveAt);
-    });
-
-    audioBtn.addEventListener('touchstart', function(e) {
-        const touch = e.touches[0];
-        offsetX = touch.clientX - audioBtn.getBoundingClientRect().left;
-        offsetY = touch.clientY - audioBtn.getBoundingClientRect().top;
-        document.addEventListener('touchmove', moveAt);
-    });
-
-    function moveAt(e) {
-        e.preventDefault();
-        let x = (e.touches ? e.touches[0].clientX : e.clientX) - offsetX;
-        let y = (e.touches ? e.touches[0].clientY : e.clientY) - offsetY;
-
-        const minX = 0;
-        const maxX = window.innerWidth - audioBtn.offsetWidth;
-        const minY = 0;
-        const maxY = window.innerHeight - audioBtn.offsetHeight;
-
-        x = Math.max(minX, Math.min(maxX, x));
-        y = Math.max(minY, Math.min(maxY, y));
-
-        audioBtn.style.left = `${x}px`;
-        audioBtn.style.top = `${y}px`;
-    }
-
-    function snapToEdge() {
-        const btnRect = audioBtn.getBoundingClientRect();
-        const viewportWidth = window.innerWidth;
-        const viewportHeight = window.innerHeight;
-
-        const distances = {
-            left: btnRect.left,
-            right: viewportWidth - btnRect.right,
-            top: btnRect.top,
-            bottom: viewportHeight - btnRect.bottom
-        };
-
-        const minDistance = Math.min(distances.left, distances.right, distances.top, distances.bottom);
-
-        if (minDistance === distances.left) {
-            audioBtn.style.left = '0px';
-        } else if (minDistance === distances.right) {
-            audioBtn.style.left = `${viewportWidth - audioBtn.offsetWidth}px`;
-        } else if (minDistance === distances.top) {
-            audioBtn.style.top = '0px';
-        } else if (minDistance === distances.bottom) {
-            audioBtn.style.top = `${viewportHeight - audioBtn.offsetHeight}px`;
+    
+        function snapToEdge() {
+            const btnRect = audioBtn.getBoundingClientRect();
+            const viewportWidth = window.innerWidth;
+            const viewportHeight = window.innerHeight;
+    
+            const distances = {
+                left: btnRect.left,
+                right: viewportWidth - btnRect.right,
+                top: btnRect.top,
+                bottom: viewportHeight - btnRect.bottom
+            };
+    
+            const minDistance = Math.min(distances.left, distances.right, distances.top, distances.bottom);
+    
+            if (minDistance === distances.left) {
+                audioBtn.style.left = '0px';
+            } else if (minDistance === distances.right) {
+                audioBtn.style.left = `${viewportWidth - audioBtn.offsetWidth}px`;
+            } else if (minDistance === distances.top) {
+                audioBtn.style.top = '0px';
+            } else if (minDistance === distances.bottom) {
+                audioBtn.style.top = `${viewportHeight - audioBtn.offsetHeight}px`;
+            }
         }
-    }
-
-    document.addEventListener('mouseup', function() {
-        document.removeEventListener('mousemove', moveAt);
-        snapToEdge();
+    
+        document.addEventListener('mouseup', function() {
+            document.removeEventListener('mousemove', moveAt);
+            snapToEdge();
+        });
+    
+        document.addEventListener('touchend', function() {
+            document.removeEventListener('touchmove', moveAt);
+            snapToEdge();
+        });
     });
-
-    document.addEventListener('touchend', function() {
-        document.removeEventListener('touchmove', moveAt);
-        snapToEdge();
-    });
-});
-
-    </script>
+    
+        </script>
 </body>
 </html>

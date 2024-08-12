@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Chi tiết lãnh đạo</title>
+    <title>Tìm kiếm</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
@@ -19,12 +19,17 @@
         <img src="logo.png" alt="Logo" class="logo">
     </header>
     <main>
-        <div id="leaderDetail" class="leader-detail-container"></div>
+        <section id="search">
+            <h1>Danh sách lãnh đạo CLB Kỹ năng</h1>
+            <div class="search-container">
+                <input type="text" id="searchBar" placeholder="Tìm kiếm tên hoặc chức vụ..." onkeyup="searchLeaders()">
+                <button id="searchButton" onclick="searchLeaders()">🔍</button>
+            </div>
+            <div id="suggestions" class="suggestion-box"></div>
+            <div id="results"></div>
+        </section>
     </main>
     <script src="search.js"></script>
-    <script>
-        displayLeaderDetail();
-    </script>
     <button id="audioControl" class="audio-btn">
         🔊
     </button>

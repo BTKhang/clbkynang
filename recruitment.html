@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Chi tiết lãnh đạo</title>
+    <title>Tuyển thành viên</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
@@ -19,11 +19,35 @@
         <img src="logo.png" alt="Logo" class="logo">
     </header>
     <main>
-        <div id="leaderDetail" class="leader-detail-container"></div>
+        <section id="recruitment">
+            <h1 id="recruitmentTitle"></h1>
+            <div id="recruitmentContent"></div>
+            <div class="contact-buttons">
+                <a href="https://www.facebook.com/buitan.khang0206" target="_blank" class="contact-link">Facebook</a>
+                <a href="https://zalo.me/0971642189" target="_blank" class="contact-link">Zalo</a>
+                <a href="tel:+84971642189" class="contact-link">Phone</a>
+            </div>
+        </section>
     </main>
-    <script src="search.js"></script>
     <script>
-        displayLeaderDetail();
+        function loadRecruitmentContent() {
+            fetch('content.json')
+                .then(response => response.json())
+                .then(data => {
+                    document.getElementById('recruitmentTitle').textContent = data.recruitmentContent.title;
+                    const recruitmentContentDiv = document.getElementById('recruitmentContent');
+                    data.recruitmentContent.paragraphs.forEach(paragraph => {
+                        const p = document.createElement('p');
+                        p.textContent = paragraph;
+                        recruitmentContentDiv.appendChild(p);
+                    });
+                })
+                .catch(error => console.error('Error loading content:', error));
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            loadRecruitmentContent();
+        });
     </script>
     <button id="audioControl" class="audio-btn">
         🔊

@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Chi tiết lãnh đạo</title>
+    <title>Cập nhật</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
@@ -19,11 +19,45 @@
         <img src="logo.png" alt="Logo" class="logo">
     </header>
     <main>
-        <div id="leaderDetail" class="leader-detail-container"></div>
+        <div id="updateList" class="update-list" style="display: none;"></div>
     </main>
-    <script src="search.js"></script>
+
     <script>
-        displayLeaderDetail();
+        const correctPassword = "skillsclup";
+
+        function requestPassword() {
+            const inputPassword = prompt("Vui lòng nhập mật khẩu:");
+            if (inputPassword === correctPassword) {
+                document.getElementById('updateList').style.display = 'block';
+                loadUpdates();
+            } else {
+                alert("Mật khẩu không chính xác. Bạn không có quyền truy cập.");
+                window.location.href = "index.html";
+            }
+        }
+
+        function loadUpdates() {
+            fetch('updates.json')
+                .then(response => response.json())
+                .then(updates => {
+                    updates.sort((a, b) => new Date(b.date) - new Date(a.date));
+                    const updateList = document.getElementById('updateList');
+                    updates.forEach(update => {
+                        const updateItem = document.createElement('div');
+                        updateItem.className = 'update-item';
+                        updateItem.innerHTML = `
+                            <img src="${update.image}" alt="${update.name}" class="update-image">
+                            <h2>${update.name}</h2>
+                            <p>Ngày: ${new Date(update.date).toLocaleDateString('vi-VN')}</p>
+                            <a href="${update.url}" target="_blank" class="btn">Xem chi tiết</a>
+                        `;
+                        updateList.appendChild(updateItem);
+                    });
+                })
+                .catch(error => console.error('Error loading updates:', error));
+        }
+
+        document.addEventListener('DOMContentLoaded', requestPassword);
     </script>
     <button id="audioControl" class="audio-btn">
         🔊
