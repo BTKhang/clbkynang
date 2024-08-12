@@ -85,11 +85,118 @@
                 })
                 .catch(error => console.error('Error loading content:', error));
         }
+        
 
         document.addEventListener('DOMContentLoaded', () => {
             showSection('home');
             loadContent();
         });
+    </script>
+    <button id="audioControl" class="audio-btn">
+        🔊
+    </button>
+    <audio id="myAudio" loop autoplay>
+        <source src="anhemtave.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+    const audio = document.getElementById('myAudio');
+    const audioBtn = document.getElementById('audioControl');
+    let isPlaying = true;
+
+    const playPromise = audio.play();
+
+    if (playPromise !== undefined) {
+        playPromise.then(_ => {
+            isPlaying = true;
+            audioBtn.textContent = '🔊';
+        }).catch(error => {
+            isPlaying = false;
+            audioBtn.textContent = '🔇';
+        });
+    }
+
+    audioBtn.addEventListener('click', function() {
+        if (isPlaying) {
+            audio.pause();
+            audioBtn.textContent = '🔇';
+        } else {
+            audio.play();
+            audioBtn.textContent = '🔊';
+        }
+        isPlaying = !isPlaying;
+    });
+
+    let offsetX, offsetY;
+
+    audioBtn.addEventListener('mousedown', function(e) {
+        offsetX = e.clientX - audioBtn.getBoundingClientRect().left;
+        offsetY = e.clientY - audioBtn.getBoundingClientRect().top;
+        document.addEventListener('mousemove', moveAt);
+    });
+
+    audioBtn.addEventListener('touchstart', function(e) {
+        const touch = e.touches[0];
+        offsetX = touch.clientX - audioBtn.getBoundingClientRect().left;
+        offsetY = touch.clientY - audioBtn.getBoundingClientRect().top;
+        document.addEventListener('touchmove', moveAt);
+    });
+
+    function moveAt(e) {
+        e.preventDefault();
+        let x = (e.touches ? e.touches[0].clientX : e.clientX) - offsetX;
+        let y = (e.touches ? e.touches[0].clientY : e.clientY) - offsetY;
+
+        const minX = 0;
+        const maxX = window.innerWidth - audioBtn.offsetWidth;
+        const minY = 0;
+        const maxY = window.innerHeight - audioBtn.offsetHeight;
+
+        x = Math.max(minX, Math.min(maxX, x));
+        y = Math.max(minY, Math.min(maxY, y));
+
+        audioBtn.style.left = `${x}px`;
+        audioBtn.style.top = `${y}px`;
+    }
+
+    function snapToEdge() {
+        const btnRect = audioBtn.getBoundingClientRect();
+        const viewportWidth = window.innerWidth;
+        const viewportHeight = window.innerHeight;
+
+        const distances = {
+            left: btnRect.left,
+            right: viewportWidth - btnRect.right,
+            top: btnRect.top,
+            bottom: viewportHeight - btnRect.bottom
+        };
+
+        const minDistance = Math.min(distances.left, distances.right, distances.top, distances.bottom);
+
+        if (minDistance === distances.left) {
+            audioBtn.style.left = '0px';
+        } else if (minDistance === distances.right) {
+            audioBtn.style.left = `${viewportWidth - audioBtn.offsetWidth}px`;
+        } else if (minDistance === distances.top) {
+            audioBtn.style.top = '0px';
+        } else if (minDistance === distances.bottom) {
+            audioBtn.style.top = `${viewportHeight - audioBtn.offsetHeight}px`;
+        }
+    }
+
+    document.addEventListener('mouseup', function() {
+        document.removeEventListener('mousemove', moveAt);
+        snapToEdge();
+    });
+
+    document.addEventListener('touchend', function() {
+        document.removeEventListener('touchmove', moveAt);
+        snapToEdge();
+    });
+});
+
     </script>
 </body>
 </html>

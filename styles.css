@@ -278,24 +278,56 @@ main {
 
 /* Responsive Design */
 @media screen and (max-width: 768px) {
-    nav ul {
+    #results {
+        display: flex;
         flex-direction: column;
-        align-items: flex-start;
+        align-items: center;
     }
-    .home-images {
-        flex-direction: column;
-    }
-    #searchBar {
+
+    .leader {
         width: 100%;
+        margin-bottom: 15px;
     }
-    #leaderDetail .leader {
-        flex-direction: column;
+
+    .leader img {
+        margin-bottom: 10px;
+        width: 80px;
+        height: 80px;
+    }
+
+    .leader h2 {
+        font-size: 20px;
+    }
+
+    .leader p {
+        font-size: 14px;
+    }
+}
+
+@media screen and (min-width: 769px) {
+    #results {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-around;
+    }
+
+    .leader {
+        width: 45%;
+        margin-bottom: 20px;
     }
 }
 
 @media screen and (max-width: 480px) {
     header .logo {
         height: 40px;
+    }
+    nav ul {
+        flex-direction: row;
+        justify-content: space-around;
+        width: 100%;
+    }
+    nav ul li {
+        margin: 0;
     }
     nav ul li a {
         font-size: 16px;
@@ -306,15 +338,83 @@ main {
         font-size: 16px;
     }
     #leaderDetail .leader img {
-        width: 150px;
-        height: 150px;
+        width: 100px;
+        height: 100px;
+    }
+    #results {
+        width: 100%;
+        padding: 0 10px;
+        box-sizing: border-box;
+    }
+    .leader {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+    .leader img {
+        margin-bottom: 10px;
+        width: 100px;
+        height: 100px;
+    }
+    .leader h2 {
+        font-size: 18px;
+    }
+    .leader p {
+        font-size: 14px;
+    }
+    #searchBar {
+        width: calc(100% - 60px);
+        margin-bottom: 10px;
+    }
+    #searchButton {
+        width: 50px;
+        padding: 10px;
     }
 }
-#clubContent p {
+
+#clubContent p, #recruitmentContent p {
     line-height: 1.2;
-    margin-bottom: 8px; 
+    margin-bottom: 4px;
 }
-#recruitmentContent p {
-    line-height: 1.2;
-    margin-bottom: 8px;
+
+#recruitment h1 {
+    margin-top: 10px;
+}
+
+#recruitment {
+    margin-top: 20px;
+}
+/* Kích thước biểu tượng loa mặc định cho máy tính */
+.audio-btn {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
+    font-size: 24px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: none;
+    cursor: pointer;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease;
+    z-index: 1000;
+    touch-action: none;
+}
+
+/* Kích thước nhỏ hơn cho điện thoại */
+@media screen and (max-width: 768px) {
+    .audio-btn {
+        width: 40px; /* Giảm kích thước biểu tượng loa */
+        height: 40px;
+        font-size: 18px; /* Giảm kích thước font của biểu tượng */
+    }
+}
+
+.audio-btn:hover {
+    transform: scale(1.1);
 }
